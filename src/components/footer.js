@@ -5,10 +5,11 @@ function Footer() {
     <React.Fragment>
       <div className="row">
         <div className="col-md-12 centrar">
-          <p>Todos los derechos reservados 2019 @escueladevrock</p>
+          <p>Melina Sciarratta 2021</p>
         </div>
       </div>
     </React.Fragment>
   );
 }
+
 export default Footer;

@@ -1,5 +1,5 @@
 import React from "react";
-import Footer from "./footer.js";
+import Footer from "./footer";
 
 function Layout(props) {
   const children = props.children;
@@ -10,4 +10,5 @@ function Layout(props) {
     </React.Fragment>
   );
 }
+
 export default Layout;

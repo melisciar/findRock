@@ -1,10 +1,11 @@
 .logo-barra {
     padding: 13px 0px 0px 0px;
-    width: 70%;
+    width: 3vw;
+    margin-left: 50%;
 }
 
-.barra {
-    padding-top: 12px;
+.barra{
+    padding-top: 22px;
 }
 
 .busqueda {
