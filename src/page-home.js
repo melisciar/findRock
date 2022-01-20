@@ -10,7 +10,7 @@ class PageHome extends React.Component {
         <div className="container">
           <div className="row centrado">
             <div className="col-md-6 centrar">
-              <img src={logo} alt="" id="logo" />
+              <img src={logo} alt="" id="logo" className="img-fluid"/>
               <Barrita history={this.props.history} />
             </div>
           </div>
