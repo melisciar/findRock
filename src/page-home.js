@@ -1,6 +1,6 @@
 import React from "react";
 import "./page-home.css";
-import logo from "./loguito.svg";
+import logo from "./logo.png";
 import Barrita from "./components/barrita";
 
 class PageHome extends React.Component {

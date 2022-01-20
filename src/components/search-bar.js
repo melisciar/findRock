@@ -1,6 +1,6 @@
 import React from "react";
 import "./search-bar.css";
-import logo from "../loguito.svg";
+import logo from "../logo.png";
 //import Barrita from "./barrita";
 import {Link} from "react-router-dom";
 
@@ -10,16 +10,22 @@ class SearchBar extends React.Component {
     busqueda: ""
   };
 
-  handleChange = e => {
+  onChange = (e) => {
+    this.setState(
+      {busqueda: e.target.value}
+    )
+    console.log(e.target.value);
+  }
+  /* handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
     console.log(e.target.name, e.target.value);
-  };
+  }; */
   handleClick = e => {
     e.preventDefault();
   };
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
-    //this.props.history.replace("/busqueda?",this.state.busqueda);
+    this.props.history.push("/busqueda?" + this.state.busqueda);
   };
   
   render() {
@@ -31,6 +37,7 @@ class SearchBar extends React.Component {
             <img src={logo} alt="logo" className="logo-barra" />
             </Link>
           </div>
+          <div className="col-md-2"></div>
           <div className="col-md-4">
           <form
               className="form-inline"
@@ -42,16 +49,16 @@ class SearchBar extends React.Component {
                   name="busqueda"
                   type="text"
                   id="buscar"
-                  value={this.props.busqueda}
-                  placeholder="Busca una banda"
-                  onChange={this.props.onChange}
+                  value={this.state.busqueda}
+                  placeholder="Buscá una banda"
+                  onChange={this.onChange}
+                  required
                 />
               </div>
             </form>
             {/* <Barrita history={this.props.history} value={this.state.busqueda}/> */}
           </div>
         </div>
-        <hr />
       </React.Fragment>
     );
   }

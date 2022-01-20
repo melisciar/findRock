@@ -17,7 +17,6 @@ class PageSearchResult extends Component {
     this.setState({
       busqueda: search,
     });
-    console.log(search, "es la búsqueda");
   }
   handleChange = (e) => {
     this.setState({
@@ -29,11 +28,9 @@ class PageSearchResult extends Component {
     return (
       <React.Fragment>
         <SearchBar
-          onChange={this.handleChange}
-          busqueda={this.state.busqueda}
           history={this.props.history}
         />
-        <SearchResult busqueda={this.state.busqueda} />
+        <SearchResult busqueda={this.props.history.location.search} />
       </React.Fragment>
     );
   }

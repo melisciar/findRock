@@ -7,7 +7,7 @@ class Barrita extends React.Component {
   };
   handleClick = (e) => {
     e.preventDefault();
-    console.log(e.target.name, "me apretaron!! :(");
+    this.props.history.push("/artista?taylor%20swift");
   };
   handleSubmit = (e) => {
     e.preventDefault();
@@ -17,7 +17,6 @@ class Barrita extends React.Component {
     this.setState(
       {busqueda: e.target.value}
     )
-    console.log(e.target.value);
   }
   render() {
     return (
@@ -29,15 +28,16 @@ class Barrita extends React.Component {
               type="text"
               id="buscar"
               value={this.props.busqueda}
-              placeholder="Buscá una banda"
+              placeholder="Buscá un artista"
               onChange={this.onChange}
+              required
             />
           </div>
           <div className="actions">
             <button className="btng" type="submit">
               Similar Artists
             </button>
-            <button className="btng">Escuela DevRock</button>
+            <button className="btng" onClick={this.handleClick}>Voy a tener suerte</button>
           </div>
         </form>
       </React.Fragment>

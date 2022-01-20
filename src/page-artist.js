@@ -1,35 +1,36 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "./page-artist.css";
-// import SearchBar from "./components/search-bar.js";
+import SearchBar from "./components/search-bar.js";
 import SimilarArtists from "./components/similar-artists";
 import Error from "./components/error.js";
 import Loading from "./components/loading.js";
-import { Link } from "react-router-dom";
-import logo from "./loguito.svg";
+import spotify from "./Spotify_Logo_RGB_White.png";
 
 class PageArtist extends Component {
   state = {
+    busqueda: "",
+    loading: true,
     spotify: {
       imagen: "",
+      href: "",
     },
     last: {
       name: "",
-      bio: ""
+      bio: "",
     },
     similar: {
-      artists:
-        [
-      {
-        images: [
-          {
-            url: ""
-          }
-        ],
-        name: ""
-      }
-    ]
-}
+      artists: [
+        {
+          images: [
+            {
+              url: "",
+            },
+          ],
+          name: "",
+        },
+      ],
+    },
   };
 
   componentDidUpdate(prevProps) {
@@ -68,26 +69,31 @@ class PageArtist extends Component {
     this.getId();
   };
 
-  getId = async()=>{
+  getId = async () => {
     let artista = this.props.history.location.search.substr(1);
-    const response = await fetch("https://api.spotify.com/v1/search?q="+artista+"&type=artist&limit=1",{
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${this.state.token}`,
+    const response = await fetch(
+      "https://api.spotify.com/v1/search?q=" + artista + "&type=artist&limit=1",
+      {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.state.token}`,
+        },
       }
-    });
+    );
     const data = await response.json();
     let id = data.artists.items[0].id;
     this.setState({
       spotify: {
-        imagen: data.artists.items[0].images[0].url
-      }
-    })
-    console.log(this.state.spotify.imagen);
-    this.relatedArtists(`https://api.spotify.com/v1/artists/${id}/related-artists`);
-  }
+        imagen: data.artists.items[0].images[0].url,
+        href: data.artists.items[0].external_urls.spotify,
+      },
+    });
+    this.relatedArtists(
+      `https://api.spotify.com/v1/artists/${id}/related-artists`
+    );
+  };
 
   relatedArtists = async (url) => {
     this.setState({
@@ -115,19 +121,16 @@ class PageArtist extends Component {
         similar: data,
       });
     }
-    console.log(this.state.similar)
     this.fetchBio();
   };
   fetchBio = async () => {
     let artista = this.props.history.location.search.substr(1);
-    let url =
-      `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artista}&api_key=${process.env.REACT_APP_LASTFM_TOKEN}&format=json`;
+    let url = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artista}&api_key=${process.env.REACT_APP_LASTFM_TOKEN}&format=json`;
     this.setState({
       loading: true,
     });
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data, "lo que trajo la api");
     if (data.error) {
       this.setState({
         loading: false,
@@ -140,8 +143,11 @@ class PageArtist extends Component {
         loading: false,
         last: {
           name: data.artist.name,
-          bio: data.artist.bio.summary,
-        }
+          bio: data.artist.bio.summary.substr(
+            0,
+            data.artist.bio.summary.indexOf("<a")
+          ),
+        },
       });
     }
   };
@@ -149,17 +155,7 @@ class PageArtist extends Component {
   render() {
     return (
       <React.Fragment>
-        {/* <SearchBar
-          onChange={this.changeHandle}
-          busqueda={this.state.busqueda}
-        /> */}
-        <div className="row">
-          <div className="col-md-2">
-            <Link to="/">
-              <img src={logo} alt="logo" className="logo-barra" />
-            </Link>
-          </div>
-        </div>
+        <SearchBar history={this.props.history} />
         {this.state.loading && <Loading />}
         {this.state.error && <Error mensaje={this.state.mensaje} />}
         <div className="container">
@@ -172,6 +168,18 @@ class PageArtist extends Component {
                 className="pic-artist top50 margen30"
               />
               <h2>{this.state.last.name}</h2>
+              <a
+                className="spotify"
+                href={this.state.spotify.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  src={spotify}
+                  alt="open in spotify"
+                  className="img-fluid"
+                />
+              </a>
               <p>{this.state.last.bio}</p>
             </div>
           </div>

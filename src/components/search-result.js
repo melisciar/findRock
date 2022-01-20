@@ -5,7 +5,7 @@ import Loading from "./loading.js";
 
 class SearchResult extends Component {
   state = {
-    loading: false,
+    loading: true,
     error: null,
     data: {
       artists: [
@@ -45,6 +45,7 @@ componentWillReceiveProps(e) {
         Authorization: `Basic  ${process.env.REACT_APP_ENCODED}`,
       },
     };
+    //pide token a la API de spotify
     const response = await fetch(
       "https://accounts.spotify.com/api/token",
       requestOptions
@@ -54,6 +55,7 @@ componentWillReceiveProps(e) {
     this.getId();
   };
 
+  //Busca la ID del artista en la API de Spotify
   getId = async()=>{
     const response = await fetch("https://api.spotify.com/v1/search?q="+this.state.termino+"&type=artist&limit=1",{
       method: "GET",
@@ -68,6 +70,7 @@ componentWillReceiveProps(e) {
     this.fetchData(`https://api.spotify.com/v1/artists/${id}/related-artists`);
   }
 
+  //Busca los artistas relacionados en Spotify
   fetchData = async (url) => {
     this.setState({
       loading: true,
@@ -102,6 +105,7 @@ componentWillReceiveProps(e) {
         {this.state.error && <Error mensaje={this.state.mensaje} />}
         <div className="container">
           <div className="row">
+            {/* Mapea los artistas */}
             {this.state.data.artists.map((artista, i) => {
               return (
                 <ArtistCard

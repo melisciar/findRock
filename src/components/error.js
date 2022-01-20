@@ -6,7 +6,7 @@ function Error(props) {
     <React.Fragment>
       <div className="upp">
         <div className="col-md-12 centrar">
-          <h3>PASARON COSAS</h3>
+          <h3>PASARON COSAS NO SOY PERFECTA SABEN</h3>
           <p>{props.mensaje}</p>
         </div>
       </div>

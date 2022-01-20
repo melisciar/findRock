@@ -1,21 +1,38 @@
-.top50{
-    margin-top: 50px;
+.top50 {
+  margin-top: 50px;
 }
 
-.pic-artist{
-    border-radius: 50%;
-    width: 250px;
+.pic-artist {
+  border-radius: 50%;
+  width: 250px;
 }
 
-.centrar{
-    text-align: center;
+.centrar {
+  text-align: center;
 }
 
-.margen30{
-    margin: 30px 0 30px
+.margen30 {
+  margin: 30px 0 30px;
 }
 
-body{
-    color: #666;
-  }
-  
+body {
+  color: #666;
+}
+
+.spotify {
+  max-width: 113px;
+  border-radius: 50px;
+  background-color: #1db954;
+  text-align: center;
+  padding: 7px 13px;
+  margin: 17px auto;
+  display: block;
+}
+
+.spotify:hover {
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.spotify img {
+  width: 100px;
+}

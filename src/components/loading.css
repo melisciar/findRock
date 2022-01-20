@@ -1,7 +1,8 @@
 .upp{
-    background: #f8f8f8;
+    background: #c02b78;
     width: 100%;
-    height: 100vh;
+    height: 200vh;
     position: absolute;
     z-index: 123333344;
+    color: white;
 }
