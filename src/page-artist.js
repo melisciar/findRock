@@ -125,7 +125,7 @@ class PageArtist extends Component {
   };
   fetchBio = async () => {
     let artista = this.props.history.location.search.substr(1);
-    let url = `http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artista}&api_key=${process.env.REACT_APP_LASTFM_TOKEN}&format=json`;
+    let url = `https://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=${artista}&api_key=${process.env.REACT_APP_LASTFM_TOKEN}&format=json`;
     this.setState({
       loading: true,
     });
